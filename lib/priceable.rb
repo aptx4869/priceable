@@ -5,7 +5,8 @@ module Priceable
   def priceable(*price_fields)
     price_fields.each do |price_field|
       suffix = SUFFIXES.detect { |suffix| self.attribute_method? "#{price_field}#{suffix}".to_sym }
-      raise ArgumentError, "Unable to find valid database field for `#{price_field}'" unless suffix
+      #raise ArgumentError, "Unable to find valid database field for `#{price_field}'" unless suffix
+      next unless suffix # raise error will cause the migration break.
       define_method price_field do
         unless send("#{price_field}#{suffix}".to_sym).nil?
           send("#{price_field}#{suffix}".to_sym) / 100.0
