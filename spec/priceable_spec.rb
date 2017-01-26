@@ -1,34 +1,39 @@
-require "spec_helper"
+# frozen_string_literal: true
+require 'spec_helper'
 
 describe Priceable do
   let(:llama) { Llama.new }
 
-  it "should create a getter method" do
-    llama.price_in_cents = 10000
-    llama.price.should == 100
+  it 'creates a getter method' do
+    llama.price_in_cents = 10_000
+    expect(llama.price).to eq 100
   end
 
-  it "should create a setter method" do
-    llama.price = 200.10
-    llama.price_in_cents.should == 20010
+  describe 'setter' do
+    it 'saves 200.10 as 20010' do
+      llama.price = 200.10
+      expect(llama.price_in_cents).to eq 20_010
+    end
 
-    llama.price = 285.53
-    llama.price_in_cents.should == 28553
+    it 'saves 285.534 as 28553' do
+      llama.price = 285.534
+      expect(llama.price_in_cents).to eq 28_553
+    end
+
+    it 'saves 285.535 as 28554' do
+      llama.price = 285.535
+      expect(llama.price_in_cents).to eq 28_554
+    end
   end
 
-  it "should return 0.0 if nil" do
-    llama.price.should == 0.0
-  end  
-
-  it "should set it as attr_accessible" do
-    Llama.accessible_attributes.to_a.should include("price")
+  it 'returns 0.0 if nil' do
+    expect(llama.price).to eq 0
   end
 
-  it "should not set it as attr_accessible if there are no accessible attributes already set" do
-    Pig.accessible_attributes.to_a.should_not include("price")
-  end
-
-  it "should raise an ArgumentError if there is no database field set" do
-    lambda { Pig.send(:priceable, :cost) }.should raise_error(ArgumentError)
+  it 'shows a warning message if there is no database field set' do
+    expect($stdout).to(
+      receive(:puts).with("WARNING: Priceable field for `cost' is not found")
+    )
+    Pig.priceable :cost
   end
 end

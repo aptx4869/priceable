@@ -1,5 +1,4 @@
+# frozen_string_literal: true
 class Llama < ActiveRecord::Base
-  attr_accessible :name
-
   priceable :price
 end
