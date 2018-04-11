@@ -15,3 +15,9 @@ spec/reports
 test/tmp
 test/version_tmp
 tmp
+package.json
+/.codeclimate.yml
+/.ruby-gemset
+/.ruby-version
+/node_modules
+/yarn.lock
