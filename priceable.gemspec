@@ -1,5 +1,7 @@
 # frozen_string_literal: true
-require File.expand_path('../lib/priceable/version', __FILE__)
+
+require 'English'
+require File.expand_path('lib/priceable/version', __dir__)
 
 Gem::Specification.new do |gem|
   gem.authors       = ['Will Cosgrove']
@@ -15,10 +17,11 @@ Gem::Specification.new do |gem|
   gem.require_paths = ['lib']
   gem.version       = Priceable::VERSION
 
-  gem.add_dependency 'activerecord', '~> 5.1.0'
+  gem.add_dependency 'activerecord', '~> 5.1'
+  gem.add_development_dependency('coveralls')
+  gem.add_development_dependency('pry')
   gem.add_development_dependency('rails')
   gem.add_development_dependency('rspec')
-  gem.add_development_dependency('sqlite3')
-  gem.add_development_dependency('coveralls')
   gem.add_development_dependency('simplecov')
+  gem.add_development_dependency('sqlite3')
 end
