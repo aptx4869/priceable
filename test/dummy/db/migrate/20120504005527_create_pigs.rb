@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class CreatePigs < ActiveRecord::Migration
   def change
     create_table :pigs do |t|

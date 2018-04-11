@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 ActiveRecord::Schema.define(version: 20_120_504_005_527) do
   create_table 'llamas', force: :cascade do |t|
     t.string   'name'
